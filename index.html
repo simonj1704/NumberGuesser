@@ -9,22 +9,31 @@
 <body>
     <h1>Number Guesser</h1>
 
-    <p>Think of a number and the computer will try to guess it</p>
-    <button>Start</button>
+    <p>Think of a number between 1 and 100 and the computer will try to guess it</p>
+    <!-- <label for="">Number between -->
+        <!-- <input type="number" name="lowestNum" id="lowestNum"> -->
+    <!-- </label> -->
+    <!-- <label for="">And -->
+        <!-- <input type="number" name="highestNum" id="highestNum"> -->
+    <!-- </label> -->
+    <!-- <br> -->
+    <button id="btn-start">Start</button>
+    <button id="btn-restart" class="hide">Restart</button>
 
-    <div>
-    <div>
+
+    <div id="main" class="hide">
+        <div id="buttons">
         <p>Is your number <span class="guess">5</span>?</p>
-        <button class="btn btn-lower">Lower</button>
-        <button class="btn btn-correct">Correct</button>
-        <button class="btn btn-higher">Higher</button>
-    </div>
+        <button class="btn-lower">Lower</button>
+        <button class="btn-correct">Correct</button>
+        <button class="btn-higher">Higher</button>
+        </div>
 
     <p>Earlier guesses</p>
-    <ul>
-        <li>x</li>
+    <ul id="earlierGuess">
     </ul>
     </div>
+    
     
     <script src="script.js"></script>
 </body>
