@@ -11,7 +11,15 @@ let firstGuess = true;
 let numberOfGuesses = 1;
 let startNumber = 0;
 let end = 100;
-let guess = Math.floor((startNumber + end) / 2);
+let guess = null;
+
+
+function getStartGuess(){
+    let middle = Math.floor((startNumber + end) / 2);
+    let upperlimit = middle + 10;
+    let lowerlimit = middle - 10;
+    guess = Math.floor(Math.random()* (upperlimit - lowerlimit) + lowerlimit);
+}
 
 function initializeButtons(){
     document.querySelector(".btn-lower")
@@ -83,6 +91,7 @@ function generateGuess(guessHigher){
     //binary search
 
     if (firstGuess){
+        getStartGuess();
         firstGuess = false;
         console.log("first")
     } else {
