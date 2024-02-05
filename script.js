@@ -7,16 +7,16 @@ function start() {
     initializeButtons();
 }
 
-let secretNumber = null;
 let firstGuess = true;
 let numberOfGuesses = 1;
-let earlierGuess = null;
-let guess = null;
+let startNumber = 0;
+let end = 100;
+let guess = Math.floor((startNumber + end) / 2);
 
 function initializeButtons(){
     document.querySelector(".btn-lower")
     .addEventListener("click", clickLower);
-    
+
     document.querySelector(".btn-correct")
     .addEventListener("click", clickCorrect);
     
@@ -62,39 +62,46 @@ function clickRestart(){
     console.log("Restart");
     firstGuess = true;
     numberOfGuesses = 1;
-    earlierGuess = null;
+    startNumber = 0;
+    end = 100;
+    guess = Math.floor((startNumber + end) / 2);
     generateGuess();
     document.querySelector("#earlierGuess").innerHTML = "";
     document.querySelector("#buttons").classList.remove("hide");
 }
 
 
+
+
 function generateGuess(guessHigher){
-    //A  + y/n^2
+    displayGuessCounter();
+    
+    if(startNumber === end){
+        alert("The only possible number is " + guess + ". Please click 'Correct' to end the game.")
+        return;
+    }
+    //binary search
+
     if (firstGuess){
-        guess = 100/2;
         firstGuess = false;
-        earlierGuess = guess;
-        numberOfGuesses++;
+        console.log("first")
     } else {
         if(guessHigher){
-            guess = earlierGuess + Math.ceil(100/Math.pow(numberOfGuesses,2));
+            startNumber = guess + 1;
         } else {
-            guess = earlierGuess - Math.ceil(100/Math.pow(numberOfGuesses,2));
+            end = guess - 1;
         }
-        earlierGuess = guess;
-        if(guess > 100){
-            guess = 100;
-            earlierGuess = 100;
-        }
-        if(guess < 0){
-            guess = 0;
-            earlierGuess = 0;
-        }
-        console.log(guess);
-        numberOfGuesses++;
+        guess = Math.floor((startNumber + end) / 2);
     }
+
+    console.log(guess);
+    numberOfGuesses++;
+    
     document.querySelector(".guess").innerHTML = guess;
 
 }
 
+
+function displayGuessCounter(){
+    document.querySelector("#guess-counter").innerHTML = numberOfGuesses;
+}
